@@ -21,9 +21,19 @@ export async function POST(request) {
     let dateSet = new Set();
 
 
-    let data = await request.text()
+    let rawText = await request.text()
 
-    data = data.split("<br>")
+    var modifiedText = '';
+    for (var i = 0; i < rawText.length; i++) {
+      if (rawText[i] === '\\') {
+        modifiedText += '%';
+      } else {
+        modifiedText += rawText[i];
+      }
+    }
+
+    let data = modifiedText.split("%")
+    console.log(data)
 
     console.log("data length is " + data.length)
     for (var i = 0; i < data.length; i++) {
@@ -88,7 +98,7 @@ export async function POST(request) {
 
     return new Response(stringToWrite, {
         headers: {
-          'Content-Type': 'text/csv',
+            'Content-Type': 'text/csv',
         },
     })
 }

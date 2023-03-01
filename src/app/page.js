@@ -18,7 +18,7 @@ export default function Home() {
   }
 
   const handleClick = e => {
-    const data = e.target.previousSibling.innerHTML;
+    const data = e.target.previousSibling.value;
     getValidity(data);
   }
 
@@ -46,11 +46,14 @@ export default function Home() {
       });
   }
   
+ var titleStyle = {
+  color: "white"
+ }
 
   return (
     <div>
-      <div>Hi Sabrina</div>
-      <div contentEditable="true" style={boxStyle}></div>
+      <div style={titleStyle}>Hi Sabrina!</div>
+      <textarea style={boxStyle}></textarea>
       <button type="button" onClick={handleClick}>Submit</button>
     </div>
   )
